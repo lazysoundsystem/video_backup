@@ -2,7 +2,8 @@
 #!/bin/bash
 
 # Run the Node.js container with the opt/app volume for configuration.
-# Include required environmental variables, and run backup.sh.
+# Include required environmental variables, run backup.sh and delete backups
+# over two weeks old.
 
 docker run -i \
     -v /srv/video_backup.rwlabs.org/opt/app:/opt/app \
@@ -13,4 +14,6 @@ docker run -i \
     sh -c "\
         . /opt/app/env.sh && \
         cd /opt/app && \
-        /opt/app/backup.js"
+        /opt/app/backup.js && \
+        cd /opt/data && \
+        find ./ -type f -mtime +14 -delete "

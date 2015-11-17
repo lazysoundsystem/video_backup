@@ -15,7 +15,7 @@ var dataStore = {};
 
 
 var writeFile = function(playlistName, playlistId, items) {
-  var path = "/opt/data/" + playlistName + "-" + new Date().toJSON().slice(0,10) + ".json";
+  var path = "/opt/data/" + playlistName.replace(/\//g, '-') + "-" + new Date().toJSON().slice(0,10) + ".json";
 
   fs.open(path, 'w+', function(error, fd) {
     if(error) {
